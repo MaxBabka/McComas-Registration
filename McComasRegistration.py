@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.options import Options
 options = Options()
 options.add_argument(r'C:\Users\maxba\AppData\Local\Google\Chrome\User_Data\Default')
 
-
+#Comment
 DRIVER_PATH = './chromedriver.exe'
 driver = webdriver.Chrome(executable_path=DRIVER_PATH)
 driver.get('https://connect.recsports.vt.edu/booking/d71f0446-5a7b-4dee-9549-9f6f3add4812')
