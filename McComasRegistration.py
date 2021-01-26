@@ -19,7 +19,12 @@ try:
     PASSWORD = input('Password please')
     vtPassword = driver.find_element_by_xpath("//input[@id='password']").send_keys(PASSWORD)
     vtLogin = driver.find_element_by_xpath("//button[@class='btn btn-primary']").click()
+    cancelPush = driver.find_element_by_xpath("//button[@id='btn-cancel']").click()
+    clickCode = driver.find_element_by_xpath("//button[@id='passcode']").click()
     CODE = input('Input Duo Code please!')
+    duoCode = driver.find_element_by_xpath("//input[@name='passcode']").send_keys(CODE)
+    duoLogin = driver.find_element_by_xpath("//button[@type='submit']").click()
+
 
 except NoSuchElementException:
     print('Already logged in!')
