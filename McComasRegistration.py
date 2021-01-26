@@ -19,6 +19,8 @@ try:
     PASSWORD = input('Password please')
     vtPassword = driver.find_element_by_xpath("//input[@id='password']").send_keys(PASSWORD)
     vtLogin = driver.find_element_by_xpath("//button[@class='btn btn-primary']").click()
+    CODE = input('Input Duo Code please!')
+
 except NoSuchElementException:
     print('Already logged in!')
 print("MADE IT TO HERE")
