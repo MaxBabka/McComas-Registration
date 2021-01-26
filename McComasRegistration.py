@@ -22,7 +22,10 @@ try:
     vtLogin = driver.find_element_by_xpath("//button[@class='btn btn-primary']").click()
     # CODE = input('Input Duo Code please!')
     #click call button
-    clickCallButton = driver.find_element_by_xpath("//button[@type='submit']").click()
+    print('About to click call')
+    clickCallButton = driver.find_element_by_xpath("//button[@class='auth-button positive']").click()#wrong
+    print('Calling...')
+    driver.implicitly_wait(5)
     #duoCode = driver.find_element_by_xpath("//input[@type='text']").send_keys(CODE)
     #duoLogin = driver.find_element_by_xpath("//button[@tabindex='2']").click()
 
