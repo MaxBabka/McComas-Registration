@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from datetime import date
 from selenium.webdriver.chrome.options import Options
+import time
 
 options = Options()
 options.add_argument(r'C:\Users\maxba\AppData\Local\Google\Chrome\User_Data\Default')
@@ -20,8 +21,8 @@ try:
     vtPassword = driver.find_element_by_xpath("//input[@id='password']").send_keys(PASSWORD)
     vtLogin = driver.find_element_by_xpath("//button[@class='btn btn-primary']").click()
     print("About to try clicking!")
-    driver.implicitly_wait(5)
-    cancelPush = driver.find_element_by_xpath("//button[@class='btn-cancel']").click()
+    driver.set_page_load_timeout(3)
+    cancelPush = driver.find_element_by_css_selector("button[class='btn-cancel'][text()='Cancel']")
     print("Push should be canceled after this point!")
     clickCode = driver.find_element_by_xpath("//button[@id='passcode']").click()
     CODE = input('Input Duo Code please!')
