@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.options import Options
 options = Options()
 options.add_argument(r'C:\Users\maxba\AppData\Local\Google\Chrome\User_Data\Default')
 
-#Comment
+
 DRIVER_PATH = './chromedriver.exe'
 driver = webdriver.Chrome(executable_path=DRIVER_PATH)
 driver.get('https://connect.recsports.vt.edu/booking/d71f0446-5a7b-4dee-9549-9f6f3add4812')
@@ -19,7 +19,10 @@ try:
     PASSWORD = input('Password please')
     vtPassword = driver.find_element_by_xpath("//input[@id='password']").send_keys(PASSWORD)
     vtLogin = driver.find_element_by_xpath("//button[@class='btn btn-primary']").click()
-    cancelPush = driver.find_element_by_xpath("//button[@id='btn-cancel']").click()
+    print("About to try clicking!")
+    driver.implicitly_wait(5)
+    cancelPush = driver.find_element_by_xpath("//button[@class='btn-cancel']").click()
+    print("Push should be canceled after this point!")
     clickCode = driver.find_element_by_xpath("//button[@id='passcode']").click()
     CODE = input('Input Duo Code please!')
     duoCode = driver.find_element_by_xpath("//input[@name='passcode']").send_keys(CODE)
