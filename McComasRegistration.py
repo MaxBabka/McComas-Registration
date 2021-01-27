@@ -31,7 +31,7 @@ try:
 
 
 except NoSuchElementException:
-    print('Already logged in!')
+    print('Error!')
 print("MADE IT TO HERE")
 dates = driver.find_element_by_xpath("//h3[@class='text-primary']")
 print(dates)
