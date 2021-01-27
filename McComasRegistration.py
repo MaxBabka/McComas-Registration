@@ -21,8 +21,13 @@ try:
     vtPassword = driver.find_element_by_xpath("//input[@id='password']").send_keys(PASSWORD)
     vtLogin = driver.find_element_by_xpath("//button[@class='btn btn-primary']").click()
 
-    # DUO code
+    # Code here is after you have logged in and are trying to authenticate using Duo Mobile
     driver.switch_to.frame("duo_iframe")
+    try:
+        cancelPush = driver.find_element_by_css_selector("button[class='btn-cancel'][text()='Cancel']")
+    except NoSuchElementException:
+        print("No cancel button was found!")
+
     driver.find_element_by_xpath("//button[@class='positive auth-button' and contains(.,'Enter a Passcode')]").click()
     CODE = input('Input Duo Code please!')
     duoCode = driver.find_element_by_xpath("//input[@type='text']").send_keys(CODE)
