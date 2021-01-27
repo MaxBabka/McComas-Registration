@@ -20,15 +20,13 @@ try:
     PASSWORD = input('Password please')
     vtPassword = driver.find_element_by_xpath("//input[@id='password']").send_keys(PASSWORD)
     vtLogin = driver.find_element_by_xpath("//button[@class='btn btn-primary']").click()
-    # CODE = input('Input Duo Code please!')
-    #click call button
-    print('About to click call')
-    clickCallButton = driver.find_element_by_xpath("//button[@class='auth-button positive']").click()#wrong
-    print('Calling...')
-    driver.implicitly_wait(5)
-    #duoCode = driver.find_element_by_xpath("//input[@type='text']").send_keys(CODE)
-    #duoLogin = driver.find_element_by_xpath("//button[@tabindex='2']").click()
 
+    # DUO code
+    driver.switch_to.frame("duo_iframe")
+    driver.find_element_by_xpath("//button[@class='positive auth-button' and contains(.,'Enter a Passcode')]").click()
+    CODE = input('Input Duo Code please!')
+    duoCode = driver.find_element_by_xpath("//input[@type='text']").send_keys(CODE)
+    duoLogin = driver.find_element_by_xpath("//button[@tabindex='2']").click()
 
 except NoSuchElementException:
     print('Already logged in!')
