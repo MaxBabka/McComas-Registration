@@ -48,7 +48,6 @@ try:
             .click()
     except NoSuchElementException:
         print("auth positive not found!")
-
     CODE = input('Input Duo Code please!')
     duoCode = driver.find_element_by_xpath("//input[@type='text']").send_keys(CODE)
     driver.find_element_by_xpath("//button[@type='submit' and contains(.,'Log In')]").click()
@@ -58,6 +57,6 @@ except NoSuchElementException:
 print("MADE IT TO HERE")
 
 #At this point you are inside of the McComas's website
-driver.switch_to_default_content()
+driver.switch_to.default_content
 dates = driver.find_element_by_xpath("//h3[@class='text-primary']")
 print(dates)
