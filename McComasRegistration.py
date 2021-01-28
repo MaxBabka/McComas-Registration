@@ -2,8 +2,11 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from datetime import date
 from selenium.webdriver.chrome.options import Options
+import time
 
 # Attempts to use Chrome profile
+from selenium.webdriver.support.wait import WebDriverWait
+
 options = Options()
 options.add_argument(r'C:\Users\maxba\AppData\Local\Google\Chrome\User_Data\Default')
 
@@ -14,6 +17,7 @@ driver.get('https://connect.recsports.vt.edu/booking/d71f0446-5a7b-4dee-9549-9f6
 
 today = date.today()
 try:
+    # login user
     pidButton = driver.find_element_by_xpath("//button[@title='VT PID']").click()  # Click the login button
     USERNAME = input('Username please')
     vtUsername = driver.find_element_by_xpath("//input[@id='username']").send_keys(USERNAME)
@@ -24,17 +28,36 @@ try:
     # Code here is after you have logged in and are trying to authenticate using Duo Mobile
     driver.switch_to.frame("duo_iframe")
     try:
-        cancelPush = driver.find_element_by_css_selector("button[class='btn-cancel'][text()='Cancel']")
+        time.sleep(4)
+        driver.implicitly_wait(3)
+        cancelPush = driver.find_element_by_xpath("//button[@class='btn-cancel']").click()
     except NoSuchElementException:
         print("No cancel button was found!")
 
-    driver.find_element_by_xpath("//button[@class='positive auth-button' and contains(.,'Enter a Passcode')]").click()
+    # These two try catch blocks should try to press the enter a passcode button
+    try:
+        time.sleep(3)
+        driver.implicitly_wait(3)
+        driver.find_element_by_xpath("//button[@class='positive auth-button' and contains(.,'Enter a Passcode ')]") \
+            .click()
+    except NoSuchElementException:
+        print("positive auth not found!")
+    try:
+        driver.implicitly_wait(3)
+        driver.find_element_by_xpath("//button[@class='auth-button positive' and contains(.,'Enter a Passcode ')]") \
+            .click()
+    except NoSuchElementException:
+        print("auth positive not found!")
+
     CODE = input('Input Duo Code please!')
     duoCode = driver.find_element_by_xpath("//input[@type='text']").send_keys(CODE)
-    duoLogin = driver.find_element_by_xpath("//button[@tabindex='2']").click()
+    driver.find_element_by_xpath("//button[@type='submit' and contains(.,'Log In')]").click()
 
 except NoSuchElementException:
     print('Already logged in!')
-# print("MADE IT TO HERE")
-# dates = driver.find_element_by_xpath("//h3[@class='text-primary']")
-# print(dates)
+print("MADE IT TO HERE")
+
+#At this point you are inside of the McComas's website
+driver.switch_to_default_content()
+dates = driver.find_element_by_xpath("//h3[@class='text-primary']")
+print(dates)
