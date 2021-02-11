@@ -58,10 +58,10 @@ print("MADE IT TO HERE")
 
 # At this point you are inside of the McComas's website
 driver.switch_to.default_content
-dates = driver.find_element_by_xpath("//h3[@class='text-primary']")
-print(dates)
+# dates = driver.find_element_by_xpath("//h3[@class='text-primary']")
+# print(dates)
 
-days = {'first day': [time, time, otherTime], 'second day': []}
+# days = {'first day': [time, time, otherTime], 'second day': []}
 
 # Find the days that you can register for so we can pull the timeslots
 # def getDays:
