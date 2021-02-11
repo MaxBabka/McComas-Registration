@@ -70,7 +70,7 @@ days = {'first day': [time, time, otherTime], 'second day': []}
 # Loop through each time slot calling the parseSlot method
 # Use for loop
 # def parseTimeSlots:
-
+ sfa
 
 # Analyzes a time slot determining if it is available
 # Return what time it is
