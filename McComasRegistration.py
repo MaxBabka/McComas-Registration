@@ -4,9 +4,6 @@ from datetime import date
 from selenium.webdriver.chrome.options import Options
 import time
 
-# Attempts to use Chrome profile
-from selenium.webdriver.support.wait import WebDriverWait
-
 options = Options()
 options.add_argument(r'C:\Users\maxba\AppData\Local\Google\Chrome\User_Data\Default')
 
@@ -26,7 +23,7 @@ try:
     USERNAME = USERNAME.strip('\n')
     PASSWORD = PASSWORD.strip('\n')
     DUO_CODE = DUO_CODE.strip('\n')
-    
+
     vtUsername = driver.find_element_by_xpath("//input[@id='username']").send_keys(USERNAME)
     vtPassword = driver.find_element_by_xpath("//input[@id='password']").send_keys(PASSWORD)
     vtLogin = driver.find_element_by_xpath("//button[@class='btn btn-primary']").click()
