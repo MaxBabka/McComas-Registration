@@ -7,15 +7,7 @@ import datetime
 
 options = Options()
 
-day1 = datetime.date.today()
-print(day1)
-day2 = datetime.date.today() + datetime.timedelta(days=1)
-day3 = datetime.date.today() + datetime.timedelta(days=2)
-day4 = datetime.date.today() + datetime.timedelta(days=3)
-givenDate = input('Please enter a date that you would like to reserve')
-currentDate = datetime.datetime.strptime('01/08/2015','%d/%m/%Y').date()
-
-#Goes to recsports website
+# Goes to recsports website
 DRIVER_PATH = './chromedriver.exe'
 driver = webdriver.Chrome(executable_path=DRIVER_PATH)
 driver.get('https://connect.recsports.vt.edu/booking/d71f0446-5a7b-4dee-9549-9f6f3add4812')
@@ -32,6 +24,15 @@ try:
     PASSWORD = PASSWORD.strip('\n')
     DUO_CODE = DUO_CODE.strip('\n')
 
+    # if no duo code is found, call the user
+    if len(DUO_CODE) == 0:
+        time.sleep(3)
+        driver.find_element_by_xpath("//button[@class='positive auth-button' and contains(.,'Call Me ')]").click()
+    else:
+        driver.find_element_by_xpath("//button[@class='auth-button positive' and contains(.,'Call Me ')]").click()
+        print("positive auth not found!")
+
+    # enters user's credentials to login
     vtUsername = driver.find_element_by_xpath("//input[@id='username']").send_keys(USERNAME)
     vtPassword = driver.find_element_by_xpath("//input[@id='password']").send_keys(PASSWORD)
     vtLogin = driver.find_element_by_xpath("//button[@class='btn btn-primary']").click()
@@ -64,11 +65,26 @@ except NoSuchElementException:
 # days = {'first day': [time, time, otherTime], 'second day': []}
 
 # Find the days that are available for registration
-# day1 = datetime.date(datetime.now())
-# day2 =
-# day3 =
-# day4 =
-# if day given by user is the same as an available day, click on that day
+# day1 = datetime.date.today()
+# day2 = datetime.date.today() + datetime.timedelta(days=1)
+# day3 = datetime.date.today() + datetime.timedelta(days=2)
+# day4 = datetime.date.today() + datetime.timedelta(days=3)
+# givenDate = input('Please enter the date on which you would like to reserve \nin the format year-month-day')
+# currentDate = datetime.datetime.strptime('01/08/2015', '%d/%m/%Y').date()
+# print(currentDate)
+# # if day given by user is the same as an available day, click on that day
+# if day1 == givenDate:
+#     day1Button = driver.find_element_by_xpath("//button[@data-button-index='1']").click()
+# elif day2 == givenDate:
+#     day1Button = driver.find_element_by_xpath("//button[@data-button-index='1']").click()
+# elif day3 == givenDate:
+#     day1Button = driver.find_element_by_xpath("//button[@data-button-index='1']").click()
+# elif day4 == givenDate:
+#     day1Button = driver.find_element_by_xpath("//button[@data-button-index='1']").click()
+# else:
+#     print('Please Enter A Valid Day In The Format: year-month-day')
+
+
 # Loop through each time slot calling the parseSlot method
 # Use for loop
 # def parseTimeSlots:
@@ -77,4 +93,3 @@ except NoSuchElementException:
 # Analyzes a time slot determining if it is available
 # Return what time it is
 # def parseSlot:
-
