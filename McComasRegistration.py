@@ -3,9 +3,17 @@ from selenium.common.exceptions import NoSuchElementException
 from datetime import date
 from selenium.webdriver.chrome.options import Options
 import time
+import datetime
 
 options = Options()
-options.add_argument(r'C:\Users\maxba\AppData\Local\Google\Chrome\User_Data\Default')
+
+day1 = datetime.date.today()
+print(day1)
+day2 = datetime.date.today() + datetime.timedelta(days=1)
+day3 = datetime.date.today() + datetime.timedelta(days=2)
+day4 = datetime.date.today() + datetime.timedelta(days=3)
+givenDate = input('Please enter a date that you would like to reserve')
+currentDate = datetime.datetime.strptime('01/08/2015','%d/%m/%Y').date()
 
 #Goes to recsports website
 DRIVER_PATH = './chromedriver.exe'
