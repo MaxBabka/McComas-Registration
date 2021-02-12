@@ -20,20 +20,16 @@ today = date.today()
 try:
     # login user
     pidButton = driver.find_element_by_xpath("//button[@title='VT PID']").click()  # Click the login button
-    print("CLicked the login button")
     USERNAME = login.readline()
     PASSWORD = login.readline()
     DUO_CODE = login.readline()
-    print(USERNAME)
-    print("About to sleep!")
-    time.sleep(3)
-    print("Finished sleeping!")
+    USERNAME = USERNAME.strip('\n')
+    PASSWORD = PASSWORD.strip('\n')
+    DUO_CODE = DUO_CODE.strip('\n')
+    
     vtUsername = driver.find_element_by_xpath("//input[@id='username']").send_keys(USERNAME)
-    print("About to sleep!")
-    time.sleep(3)
-    print("Finished sleeping!")
     vtPassword = driver.find_element_by_xpath("//input[@id='password']").send_keys(PASSWORD)
-    # vtLogin = driver.find_element_by_xpath("//button[@class='btn btn-primary']").click()
+    vtLogin = driver.find_element_by_xpath("//button[@class='btn btn-primary']").click()
 
     # Code here is after you have logged in and are trying to authenticate using Duo Mobile
     driver.switch_to.frame("duo_iframe")
@@ -49,12 +45,9 @@ try:
         driver.find_element_by_xpath("//button[@class='positive auth-button' and contains(.,'Enter a Passcode ')]") \
             .click()
     except NoSuchElementException:
-        print("positive auth not found!")
-    try:
         driver.find_element_by_xpath("//button[@class='auth-button positive' and contains(.,'Enter a Passcode ')]") \
             .click()
-    except NoSuchElementException:
-        print("auth positive not found!")
+        print("positive auth not found!")
 
     duoCode = driver.find_element_by_xpath("//input[@type='text']").send_keys(DUO_CODE)
     driver.find_element_by_xpath("//button[@type='submit' and contains(.,'Log In')]").click()
