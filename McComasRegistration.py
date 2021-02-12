@@ -61,16 +61,14 @@ except NoSuchElementException:
     print('Already logged in!')
 
 # At this point you are inside of the McComas's website
-driver.switch_to.default_content
-# dates = driver.find_element_by_xpath("//h3[@class='text-primary']")
-# print(dates)
-
 # days = {'first day': [time, time, otherTime], 'second day': []}
 
-# Find the days that you can register for so we can pull the timeslots
-# def getDays:
-    # days =
-
+# Find the days that are available for registration
+# day1 = datetime.date(datetime.now())
+# day2 =
+# day3 =
+# day4 =
+# if day given by user is the same as an available day, click on that day
 # Loop through each time slot calling the parseSlot method
 # Use for loop
 # def parseTimeSlots:
