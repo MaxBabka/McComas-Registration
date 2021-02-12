@@ -3,12 +3,19 @@ from selenium.common.exceptions import NoSuchElementException
 from datetime import date
 from selenium.webdriver.chrome.options import Options
 import time
+import datetime
 
 # Attempts to use Chrome profile
-from selenium.webdriver.support.wait import WebDriverWait
+
+day1 = datetime.date.today()
+print(day1)
+day2 = datetime.date.today() + datetime.timedelta(days=1)
+day3 = datetime.date.today() + datetime.timedelta(days=2)
+day4 = datetime.date.today() + datetime.timedelta(days=3)
+givenDate = input('Please enter a date that you would like to reserve')
+currentDate = datetime.datetime.strptime('01/08/2015','%d/%m/%Y').date()
 
 options = Options()
-options.add_argument(r'C:\Users\maxba\AppData\Local\Google\Chrome\User_Data\Default')
 
 #Goes to recsports website
 DRIVER_PATH = './chromedriver.exe'
@@ -57,22 +64,19 @@ except NoSuchElementException:
 print("MADE IT TO HERE")
 
 # At this point you are inside of the McComas's website
-driver.switch_to.default_content
-dates = driver.find_element_by_xpath("//h3[@class='text-primary']")
-print(dates)
+# days = {'first day': [time, time, otherTime], 'second day': []}
 
-days = {'first day': [time, time, otherTime], 'second day': []}
-
-# Find the days that you can register for so we can pull the timeslots
-# def getDays:
-    # days =
-
+# Find the days that are available for registration
+# day1 = datetime.date(datetime.now())
+# day2 =
+# day3 =
+# day4 =
+# if day given by user is the same as an available day, click on that day
 # Loop through each time slot calling the parseSlot method
 # Use for loop
 # def parseTimeSlots:
- sfa
+
 
 # Analyzes a time slot determining if it is available
 # Return what time it is
 # def parseSlot:
-
