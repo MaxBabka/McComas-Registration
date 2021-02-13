@@ -24,14 +24,6 @@ try:
     PASSWORD = PASSWORD.strip('\n')
     DUO_CODE = DUO_CODE.strip('\n')
 
-    # if no duo code is found, call the user
-    if len(DUO_CODE) == 0:
-        time.sleep(3)
-        driver.find_element_by_xpath("//button[@class='positive auth-button' and contains(.,'Call Me ')]").click()
-    else:
-        driver.find_element_by_xpath("//button[@class='auth-button positive' and contains(.,'Call Me ')]").click()
-        print("positive auth not found!")
-
     # enters user's credentials to login
     vtUsername = driver.find_element_by_xpath("//input[@id='username']").send_keys(USERNAME)
     vtPassword = driver.find_element_by_xpath("//input[@id='password']").send_keys(PASSWORD)
@@ -40,23 +32,28 @@ try:
     # Code here is after you have logged in and are trying to authenticate using Duo Mobile
     driver.switch_to.frame("duo_iframe")
     try:
-        time.sleep(4)
+        time.sleep(3)
         cancelPush = driver.find_element_by_xpath("//button[@class='btn-cancel']").click()
     except NoSuchElementException:
         print("No cancel button was found!")
 
     # These two try catch blocks should try to press the enter a passcode button
-    try:
-        time.sleep(3)
-        driver.find_element_by_xpath("//button[@class='positive auth-button' and contains(.,'Enter a Passcode ')]") \
-            .click()
-    except NoSuchElementException:
-        driver.find_element_by_xpath("//button[@class='auth-button positive' and contains(.,'Enter a Passcode ')]") \
-            .click()
-        print("positive auth not found!")
-
-    duoCode = driver.find_element_by_xpath("//input[@type='text']").send_keys(DUO_CODE)
-    driver.find_element_by_xpath("//button[@type='submit' and contains(.,'Log In')]").click()
+    if len(DUO_CODE) == 0:
+        time.sleep(2)
+        driver.find_element_by_xpath("//button[@class='positive auth-button' and contains(.,'Call Me ')]").click()
+    else:
+        try:
+            time.sleep(1)
+            driver.find_element_by_xpath("//button[@class='positive auth-button' and contains(.,'Enter a Passcode ')]") \
+                .click()
+            duoCode = driver.find_element_by_xpath("//input[@type='text']").send_keys(DUO_CODE)
+            driver.find_element_by_xpath("//button[@type='submit' and contains(.,'Log In')]").click()
+        except NoSuchElementException:
+            driver.find_element_by_xpath("//button[@class='auth-button positive' and contains(.,'Enter a Passcode ')]") \
+                .click()
+            duoCode = driver.find_element_by_xpath("//input[@type='text']").send_keys(DUO_CODE)
+            driver.find_element_by_xpath("//button[@type='submit' and contains(.,'Log In')]").click()
+            print("positive auth not found!")
 
 except NoSuchElementException:
     print('Already logged in!')
